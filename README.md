@@ -11,7 +11,7 @@
 To deploy the project to the web:
 
 ```bash
-cd personal-site/
+cd personal-site/personal/
 
 # Make changes to the site, then build
 npm run build
