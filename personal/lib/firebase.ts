@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getPerformance } from "firebase/performance";
 
 // Firebase web config values are public identifiers, safe to ship in client code.
 const firebaseConfig = {
@@ -20,4 +21,9 @@ export async function initAnalytics() {
     return getAnalytics(app);
   }
   return null;
+}
+
+// Performance Monitoring also needs a browser; call only from client-side code.
+export function initPerformance() {
+  return getPerformance(app);
 }

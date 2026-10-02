@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect } from "react"
-import { initAnalytics } from "@/lib/firebase"
+import { initAnalytics, initPerformance } from "@/lib/firebase"
 
 export function Analytics() {
   useEffect(() => {
     initAnalytics()
+    initPerformance()
   }, [])
 
   return null
