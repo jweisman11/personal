@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "weisman-01",
     "public": "out",
     "ignore": [
       "firebase.json",
