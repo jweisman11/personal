@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Layout
 
-The repo root holds only docs (`README.md`, `PRD.md`), this file, and `.github/`. The whole web app lives in `personal/` — run every npm/firebase command from there. `PRD.md` is the product spec (site structure, goals).
+The repo root holds only `README.md`, this file, `docs/` and `.github/`. The whole web app lives in `personal/` — run every npm/firebase command from there. `docs/PRD.md` is the product spec (site structure, goals); `docs/FIREBASE.md` covers how Firebase is used.
 
 ## Commands (run in `personal/`)
 
