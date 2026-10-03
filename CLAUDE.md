@@ -32,3 +32,4 @@ Pushing to `main` triggers `.github/workflows/firebase-deploy.yml`, which does `
 
 - `README.md` still contains Create React App boilerplate below the deploy notes; it does not describe this app.
 - `.mcp.json` (shadcn MCP server) is in `personal/`, so start Claude Code from there for it to apply.
+- Git workflow: commit and push directly to `main`; only create a branch/PR when explicitly told to.
