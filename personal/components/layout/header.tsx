@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Github, Youtube, Linkedin } from "lucide-react"
+import { Github, Youtube, Linkedin } from "@/components/brand-icons"
 import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
