@@ -17,12 +17,12 @@ There is no test suite.
 
 ## Architecture
 
-Next.js 15 App Router + TypeScript + Tailwind v4 + shadcn/ui, exported as a fully static site (`output: "export"` in `next.config.ts`). Because it is static, there are no API routes or runtime server features; anything dynamic must resolve at build time.
+Next.js 16 App Router + TypeScript + Tailwind v4 + shadcn/ui, exported as a fully static site (`output: "export"` in `next.config.ts`). Because it is static, there are no API routes or runtime server features; anything dynamic must resolve at build time.
 
-- `app/` — routes: home, about, projects, tech-stack, tools, blog, `blog/[slug]` (uses `generateStaticParams`).
-- `content/posts/*.md` — blog posts (frontmatter + markdown). `lib/blog.ts` reads them from disk with `gray-matter` and renders with remark/remark-html at build time. It resolves the folder via `process.cwd()`, so builds must run from `personal/`.
-- `data/tools.json` — data for the tools page.
-- `components/ui` is shadcn-generated (`components.json`); `components/layout/header.tsx` is the nav; `lib/utils.ts` has the `cn` helper.
+- `app/` — routes: home (hero, latest posts, about), blog, `blog/[slug]` (uses `generateStaticParams`), `not-found`.
+- `components/bender/` — the Bender-style mascot. `bender.tsx` is the animated SVG; `bender-art.tsx` swaps in `public/bender/<name>.(gif|webp|png|jpg|svg)` at build time if present (slots: `hero`, `post-footer`, `404`).
+- `content/posts/*.md` — blog posts (frontmatter: `title`, `date` + markdown). `lib/blog.ts` reads them from disk with `gray-matter` and renders with remark/remark-html at build time. It resolves the folder via `process.cwd()`, so builds must run from `personal/`.
+- `components/ui` is shadcn-generated (`components.json`); `components/layout/header.tsx` is the nav (light/dark toggle only); `lib/utils.ts` has the `cn` helper.
 
 ## Deployment
 

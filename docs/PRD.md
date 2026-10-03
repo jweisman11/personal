@@ -1,147 +1,96 @@
 # Product Requirements Document (PRD)
 
-**Product:** [jeffweisman.com](https://jeffweisman.com)  
-**Owner:** Jeff Weisman  
-**Tech Stack:**  
-- **Frontend:** Next.js + Shadcn + Tailwind CSS  
-- **Hosting:** Firebase Hosting  
-- **Data:** Markdown (blogs), JSON (tech stack + tools)  
-- **Analytics:** Firebase Analytics  
+**Product:** [jeffweisman.com](https://jeffweisman.com)
+**Owner:** Jeff Weisman
+**Version:** 2.0 (full redesign)
+
+**Tech stack**
+- **Frontend:** Next.js (static export) + Tailwind CSS + shadcn/ui
+- **Hosting:** Firebase Hosting, deployed from `main` via GitHub Actions
+- **Content:** Markdown files (blog posts)
+- **Analytics:** Firebase Analytics
 
 ---
 
 ## 1. Goals & Audience
-The personal site is designed as a central hub for Jeff Weisman’s professional and personal online presence. It should:  
-- Provide an **accessible portfolio** for technical peers and general readers.  
-- Showcase **projects, tools, blog posts, and tech stack** in a modular, easy-to-navigate format.  
-- Balance **professionalism** (education, skills, projects) with **personal connection** (story, hobbies, media).  
-- Act as a **content hub**, driving readers to blogs and YouTube videos.  
+
+A small, fun personal site that does two things:
+
+1. Tells visitors a little **about Jeff**.
+2. Gives Jeff a low-friction place to post **random thoughts** as a blog.
+
+It is no longer a professional portfolio. There are no project, tech-stack or tools pages. The audience is friends, colleagues and curious strangers.
 
 ---
 
 ## 2. Tone & Style
-- **Voice:** Professional but approachable.  
-- **Visuals:** Clean, modern UI using Shadcn defaults with customization.  
-- **User personalization:** Theme switcher allowing users to choose from multiple color palettes (including light/dark).  
+
+- **Voice:** casual, a little sarcastic, never corporate.
+- **Look:** clean and modern, with quirky touches (dotted-paper background, tilted "sticker" labels, mono-spaced accents, a playful accent color).
+- **Mascot:** a Bender-style robot appears throughout as the site's personality.
+- **Theme:** light and dark mode only (follows the system setting, with a manual toggle). No color palette switcher.
 
 ---
 
-## 3. Site Structure & Requirements
+## 3. Site Structure
 
-### 3.1 Global Layout
-- **Navigation Bar:** Home | About | Projects | Tech Stack | Blog | Tools  
-- **Footer:** Contact links (email, LinkedIn, GitHub, YouTube)  
+### 3.1 Global layout
+- **Header:** name/wordmark, links to *About* (`/#about`) and *Blog*, social icons (GitHub, LinkedIn, YouTube), light/dark toggle.
+- **Footer:** social links and a disclaimer that the robot is an original drawing.
 
----
+### 3.2 Home (`/`)
+Single-page landing with three sections:
 
-### 3.2 Home / Landing Page
-**Purpose:** First impression; greet users and direct them to key content.  
+1. **Hero:** greeting, short tagline, "Read the blog" and "About me" buttons, and the animated robot. Clicking the robot makes it hop and say a new quip.
+2. **Latest thoughts:** the 3 most recent posts (title + date).
+3. **About me** (`#about`): a short bio, a facts card (job, experience, path, off-the-clock) and social links.
 
-**Requirements:**  
-- General greeting (“Hi, I’m Jeff Weisman...”)  
-- Call-to-Actions:  
-  - “Read My Blog” → Blog page  
-  - “Check Out My YouTube” → external YT channel  
-- *(Future)* Option to highlight **latest blog post** or **featured project**.  
+### 3.3 Blog (`/blog`, `/blog/[slug]`)
+- Posts are markdown files in `personal/content/posts/` with frontmatter `title` and `date` (`YYYY-MM-DD`).
+- List page: title and date only, newest first.
+- Post page: title, date, rendered markdown, small robot sign-off.
+- No tags, categories, excerpts or reading-time. Posting a thought means adding one file.
 
----
-
-### 3.3 About Page
-**Purpose:** Share Jeff’s background in a modular format.  
-
-**Requirements:**  
-- **Sections:**  
-  - Story (personal + professional journey)  
-  - Education (degree, schools, certs)  
-  - Work History (jobs, roles, accomplishments)  
-  - Core Skills (tags/pills for easy scanning)  
-  - Certifications (icons or images if available)  
-  - Interests/Hobbies (photos optional)  
-- Include photos/media where relevant.  
+### 3.4 404
+Robot plus a snarky message and a link home.
 
 ---
 
-### 3.4 Projects Page
-**Purpose:** Showcase Jeff’s portfolio.  
+## 4. Bender Imagery
 
-**Requirements:**  
-- Project cards with:  
-  - Name  
-  - Description  
-  - Status (Completed / In Progress)  
-  - Tech Used (tags)  
-  - Live link (if available)  
-  - GitHub repo (if available)  
-- Visual indicator for in-progress projects (badge, icon, or label).  
+The site supports both animated and static Bender art without relying on copyrighted assets by default.
 
----
+- **Default (shipped):** an original, Bender-*inspired* robot drawn in SVG, animated with CSS (antenna wobble, blinking, eyes looking around, cigar smoke, waving arm, idle bob, click-to-hop). Animations are disabled under `prefers-reduced-motion`.
+- **Optional (owner-supplied):** Futurama art is Fox/Disney IP. If Jeff chooses to use it, he supplies the files himself. Any file named `hero`, `post-footer` or `404` with a `.gif`, `.webp`, `.png`, `.jpg` or `.svg` extension in `personal/public/bender/` automatically replaces the matching SVG slot at build time (GIFs and WebP cover animation). No code changes needed.
+- Using official art is a copyright risk the owner accepts; the repo ships without it.
 
-### 3.5 Tech Stack Page
-**Purpose:** Highlight Jeff’s preferred and current tools.  
-
-**Requirements:**  
-- Data sourced from **JSON file**.  
-- Sections:  
-  - Tech I use regularly  
-  - Tech I’m currently learning  
-  - Tech I want to learn  
-- Each tech displayed with **logo/icon + name**.  
+| Slot | Where | Notes |
+|------|-------|-------|
+| `hero` | Home hero | Waving pose, click-to-talk |
+| `post-footer` | End of each blog post | Small, ~64px wide |
+| `404` | Not-found page | ~160px wide |
 
 ---
 
-### 3.6 Blog Page
-**Purpose:** Share technical + personal blogs.  
+## 5. Design & UX
 
-**Requirements:**  
-- Markdown-based posts using `gray-matter`, `remark`, `rehype-html`.  
-- Blog list page: titles only (no previews).  
-- Each post supports:  
-  - Tags / Categories  
-  - Syntax highlighting for code snippets  
-- Post detail page includes:  
-  - Title  
-  - Date  
-  - Tags  
-  - Full Markdown-rendered content  
+- **UI:** Tailwind with shadcn primitives (button).
+- **Responsive:** mobile-first.
+- **Accessibility:** semantic HTML, sufficient contrast in both themes, labelled icon buttons, reduced-motion support, SVG with accessible label.
 
 ---
 
-### 3.7 Tools Page
-**Purpose:** Share Jeff’s favorite tools.  
+## 6. Non-Functional Requirements
 
-**Requirements:**  
-- Data sourced from JSON.  
-- Tools table with columns:  
-  - Name  
-  - Category  
-  - Use-case  
-  - My rating  
-  - Link  
-  - Notes  
-- Client-side search + filtering by name, category, or rating.  
+- **Performance:** fully static; pages load in under 2s on broadband.
+- **Analytics:** Firebase Analytics (page views).
+- **Hosting/CI:** push to `main` builds and deploys to Firebase Hosting.
 
 ---
 
-## 4. Design & UX
-- **UI:** Shadcn components styled with Tailwind.  
-- **Themes:** Multiple color palettes + light/dark mode toggle.  
-- **Responsive:** Mobile-first design, fully responsive.  
-- **Accessibility:** WCAG-compliant (contrast, semantic HTML).  
+## 7. Out of Scope / Future Ideas
 
----
-
-## 5. Non-Functional Requirements
-- **Performance:** Pages load <2s on standard broadband.  
-- **SEO (minimal):** Auto sitemap + robots.txt (future expansion possible).  
-- **Analytics:** Firebase Analytics (visits, page views, CTA clicks).  
-- **Hosting:** Firebase Hosting CI/CD pipeline from `main` branch.  
-
----
-
-## 6. Future Enhancements (Not in v1.0)
-- Featured blog post/project on Home page.  
-- SEO-friendly blog posts (metadata, social sharing).  
-- Contact form (Firebase Functions).  
-- Dashboard/visualization on Tools page.  
-
----
+- Tags or categories on posts, syntax highlighting for code blocks.
+- RSS feed, sitemap/robots.txt, social-share metadata.
+- More robot poses (sleeping, dancing) and a Konami-code easter egg.
+- Contact form.
