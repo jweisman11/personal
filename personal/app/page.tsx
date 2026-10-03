@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowRight, Code, Lightbulb, Rocket } from "lucide-react";
+import { Code, Lightbulb, Rocket } from "lucide-react";
 
 export default function Home() {
   return (
@@ -30,19 +29,6 @@ export default function Home() {
                 Passionate about building products that make a difference and helping others grow in tech.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/about">
-                  <Button size="lg" className="w-full sm:w-auto group">
-                    Learn More About Me
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Link href="/projects">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    View My Work
-                  </Button>
-                </Link>
-              </div>
 
               {/* Quick Stats */}
               <div className="flex flex-wrap gap-6 pt-4">

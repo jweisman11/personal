@@ -13,13 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-const navigationItems = [
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Tech Stack", href: "/tech-stack" },
-  { name: "Blog", href: "/blog" },
-  { name: "Tools", href: "/tools" },
-]
+const navigationItems: { name: string; href: string }[] = []
 
 export function Header() {
   const pathname = usePathname()
